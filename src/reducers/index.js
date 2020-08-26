@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import test from './test';
+import App from '../App';
 
 export default combineReducers({
-    test
+    App
 });

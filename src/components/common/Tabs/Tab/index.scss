@@ -1,0 +1,10 @@
+.tab {
+    flex-grow: 1;
+
+    &__button {
+        cursor: pointer;
+        width: 100%;
+        border: none;
+        background: none;
+    }
+}

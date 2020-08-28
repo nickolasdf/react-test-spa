@@ -9,7 +9,7 @@ const tabList = [
         link: '/users'
     },
     {
-        title: 'Selected users',
+        title: 'Marked users',
         link: '/selected-users'
     }
 ];

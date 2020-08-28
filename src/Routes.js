@@ -4,6 +4,8 @@ import Layout from './components/common/Layout';
 
 import NotFoundPage from './pages/NotFoundPage';
 import UsersPage from './pages/UsersPage';
+import SelectedUsersPage from './pages/SelectedUsersPage';
+import UserPage from './pages/UserPage';
 
 const WithLayout = ({ children, ...rest }) => {
     return (
@@ -25,8 +27,11 @@ const Routes = () => {
                 <WithLayout exact path="/users">
                     <UsersPage/>
                 </WithLayout>
+                <WithLayout exact path="/users/:id">
+                    <UserPage/>
+                </WithLayout>
                 <WithLayout exact path="/selected-users">
-                    <h1>Selected users</h1>
+                    <SelectedUsersPage/>
                 </WithLayout>
                 <Route exact path="*">
                     <NotFoundPage/>

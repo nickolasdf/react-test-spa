@@ -12,7 +12,7 @@ const Tab = ({ title, link }) => {
 
     return (
         <div className="tab card">
-            <button className="tab__button btn btn-primary" onClick={handleClick}>{title}</button>
+            <button className="tab__button btn btn-secondary" onClick={handleClick}>{title}</button>
         </div>
     );
 };

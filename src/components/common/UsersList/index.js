@@ -1,61 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import './index.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateUsers } from '../../../reducers/Users/actions';
+import MarkCell from './MarkCell';
+import Filter from './Filter';
+import { useHistory } from 'react-router';
+
+const filters = [
+    {
+        label: 'First name',
+        field: 'firstName'
+    },
+    {
+        label: 'Last Name',
+        field: 'lastName'
+    }
+];
 
 const UsersList = ({ data = [] }) => {
-    const dispatch = useDispatch();
-    const users = useSelector(state => state.Users.data.results);
+    const [filterValues, setFilterValues] = useState({});
+    const history = useHistory();
 
-    const handleClickMark = id => () => {
-        const newList = users.map(user => {
-            if (user.login.uuid === id) {
-                return {
-                    ...user,
-                    marked: true
-                };
-            } else {
-                return user;
-            }
-        });
-        dispatch(updateUsers(newList));
+    const handleFilterChange = values => {
+        setFilterValues(values);
+    };
+
+    const handleRowClick = id => () => {
+        history.push(`/users/${id}`);
     };
 
     return (
-        <div className="card">
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">id</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">First Name</th>
-                        <th scope="col">Last Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map(user => {
-
-                        return (
-                            <tr key={user.login.uuid}>
-                                <th className="align-middle" scope="row">{user.login.uuid}</th>
-                                <td className="align-middle">
-                                    <img alt="avatar" src={user.picture.thumbnail}/>
-                                </td>
-                                <td className="align-middle">{user.name.first}</td>
-                                <td className="align-middle">{user.name.last}</td>
-                                <td className="align-middle">
-                                    <button
-                                        className={`btn btn-primary`}
-                                        onClick={handleClickMark(user.login.uuid)}
-                                    >
-                                        Mark
-                                    </button>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+        <div>
+            <Filter filters={filters} onFilterChange={handleFilterChange}/>
+            <div className="card">
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Avatar</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col"/>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map(user => {
+                            return (
+                                <tr key={user.login.uuid} onClick={handleRowClick(user.login.uuid)}>
+                                    <th className="align-middle" scope="row">{user.login.uuid}</th>
+                                    <td className="align-middle">
+                                        <img alt="avatar" src={user.picture.thumbnail}/>
+                                    </td>
+                                    <td className="align-middle">{user.name.first}</td>
+                                    <td className="align-middle">{user.name.last}</td>
+                                    <td className="align-middle">
+                                        {user.marked ?
+                                            <MarkCell user={user} btnClass="success" text="Marked"/> :
+                                            <MarkCell user={user}/>}
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 };

@@ -9,7 +9,7 @@ const LoadMoreButton = () => {
     const handleClick = () => {
         dispatch(fetchUsers({ results: 20, page: info.page + 1 }));
     };
-    console.log(info);
+
     return (
         <button className="btn btn-primary" type="button" onClick={handleClick}>Load More</button>
     );

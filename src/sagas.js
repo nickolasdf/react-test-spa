@@ -1,15 +1,21 @@
-import { takeEvery } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
-import { startTimer } from './reducers/App/actions';
-import { START_TIMER } from './reducers/App/actionTypes';
+import { FETCH_USERS } from './reducers/Users/actionTypes';
+import { usersFailure, usersSuccess } from './reducers/Users/actions';
+import { hideLoader } from './reducers/App/actions';
+import api from './api';
 
-const delay = (ms) => new Promise(res => setTimeout(res, ms));
+function* fetchUsersWorker(action) {
+    try {
+        const resp = yield call(api.Users.getUsers, action.payload);
+        yield put(usersSuccess(resp.data));
+        yield put(hideLoader());
+    } catch (error) {
+        yield put(usersFailure(error));
+        yield put(hideLoader());
+    }
+};
 
-export function* timeWatcher() {
-    takeEvery(START_TIMER, timeWorker);
-}
-
-function* timeWorker() {
-    yield delay(250);
-    yield startTimer();
+export function* watchUsers() {
+    yield takeEvery(FETCH_USERS, fetchUsersWorker);
 }

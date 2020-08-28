@@ -1,0 +1,4 @@
+export const FETCH_USERS = 'FETCH_USERS';
+export const USERS_SUCCESS = 'USERS_SUCCESS';
+export const USERS_FAILURE = 'USERS_FAILURE';
+export const UPDATE_USERS = 'UPDATE_USERS';

@@ -1,1 +1,2 @@
-export const START_TIMER = "START_TIMER";
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';

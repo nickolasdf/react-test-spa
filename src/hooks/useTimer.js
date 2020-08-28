@@ -13,7 +13,7 @@ const useTimer = (delay = 1000) => {
         return () => {
             clearInterval(timerId);
         };
-    }, []);
+    }, [delay]);
 
     return time;
 };

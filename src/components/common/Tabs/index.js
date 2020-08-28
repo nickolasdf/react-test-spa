@@ -5,11 +5,11 @@ import './index.scss';
 
 const tabList = [
     {
-        title: 'Список пользователей',
+        title: 'Users',
         link: '/users'
     },
     {
-        title: 'Список отмеченных пользователей',
+        title: 'Selected users',
         link: '/selected-users'
     }
 ];

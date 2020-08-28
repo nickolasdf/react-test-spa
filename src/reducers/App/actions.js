@@ -1,7 +1,13 @@
 import * as actionTypes from './actionTypes';
 
-export const startTimer = () => {
+export const showLoader = () => {
     return {
-        type: actionTypes.START_TIMER
+        type: actionTypes.SHOW_LOADER
+    };
+};
+
+export const hideLoader = () => {
+    return {
+        type: actionTypes.HIDE_LOADER
     };
 };

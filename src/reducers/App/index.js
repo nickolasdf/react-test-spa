@@ -1,18 +1,22 @@
 import * as actionTypes from './actionTypes';
 
 const initialState = {
-    time: new Date()
+    isLoading: true
 };
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.START_TIMER:
+        case actionTypes.SHOW_LOADER:
             return {
                 ...state,
-                time: new Date()
+                isLoading: true
+            };
+        case actionTypes.HIDE_LOADER:
+            return {
+                ...state,
+                isLoading: false
             };
         default:
             return state;
     }
 };
-
